@@ -132,5 +132,59 @@ public class CommonActions extends CommomObjects {
 			throw new NotSupportedException("option can be 'Yes' OR 'N0'");
 		}
 	}
+	
+	public String clickAllowBlockForMicroPhoneCameraOption(String browserData, String options)
+			throws FindFailed, FileNotFoundException, NotSupportedException,
+			UnsupportedEncodingException {
+		if (browserData == null) {
+			log.severe("Browser query param  is missing");
+			throw new NotSupportedException(
+					" Browser query param cannot be null!! or it is missing");
+		}
+		switch (browserData.toLowerCase()) {
+		case "chrome":
+			if (options == null) {
+				log.severe("option query param  is missing");
+				throw new NotSupportedException("option query param  is missing");
+			}
+
+			if (options.equalsIgnoreCase("yes") || options.equalsIgnoreCase("y")) {
+				SikuliActions.click(RESOURCES.COMMON, allowCameraMicrophone, browserData);
+				return "Success";
+			} else if (options.equalsIgnoreCase("no")
+					|| options.equalsIgnoreCase("n")) {
+				SikuliActions.click(RESOURCES.COMMON, blockCameraMicrophone, browserData);
+				return "Success";
+			} else {
+				log.severe("option can be 'Yes' OR 'N0'");
+				throw new NotSupportedException("option can be 'Yes' OR 'N0'");
+			}
+		default:
+			log.severe("Invalid browser -" + browserData
+					+ ". Supported browser is chrome");
+			throw new NotSupportedException("Invalid browser -" + browserData
+					+ ". Supported browser is chrome");
+		}
+	}
+	
+	public String closeCameraMicrophoneOption(String browserData)
+			throws FindFailed, FileNotFoundException, NotSupportedException,
+			UnsupportedEncodingException {
+		if (browserData == null) {
+			log.severe("Browser query param  is missing");
+			throw new NotSupportedException(
+					" Browser query param cannot be null!! or it is missing");
+		}
+		switch (browserData.toLowerCase()) {
+		case "chrome":
+			SikuliActions.click(RESOURCES.COMMON, closeCameraMicrophoneDialog, browserData);
+			return "Success";
+		default:
+			log.severe("Invalid browser -" + browserData
+					+ ". Supported browser is chrome");
+			throw new NotSupportedException("Invalid browser -" + browserData
+					+ ". Supported browser is chrome");
+		}
+	}
 
 }

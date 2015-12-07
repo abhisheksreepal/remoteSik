@@ -36,9 +36,19 @@ public class CommonResource {
 				"closePostEventConfirmationDialog",
 				"/closePostEventConfirmationDialog",
 				"close post confirm dialog window by selecting yes or no");
+		CommonActions actions3 = new CommonActions(
+				"clickCameraMicrophoneOption",
+				"/clickCameraMicrophoneOption",
+				"allow or block camera and microphone");
+		CommonActions actions4 = new CommonActions(
+				"closeCameraMicrophoneOption",
+				"/closeCameraMicrophoneOption",
+				"close allow camera microphone dialog box");
 		List<CommonActions> list = new ArrayList<>();
 		list.add(actions);
 		list.add(actions2);
+		list.add(actions3);
+		list.add(actions4);
 		return list;
 	}
 
@@ -94,6 +104,88 @@ public class CommonResource {
 					.status(Status.OK)
 					.entity("Successfully closed confirmation dialog window with option -"
 							+ option).build();
+		} catch (FindFailed findFailed) {
+			log.severe(findFailed.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.FIND_FAILED_EXCEPTION
+							.getValue(), "Image Find Failed Exception"))
+					.entity(findFailed.toString()).build();
+		} catch (FileNotFoundException fileNotFound) {
+			log.severe(fileNotFound.toString());
+			return Response
+					.status(new CustomStatusType(
+							STATUS.FILE_NOT_FOUND_EXCEPTION.getValue(),
+							"Image File not found Exception"))
+					.entity(fileNotFound.toString()).build();
+		} catch (NotSupportedException notSupported) {
+			log.severe(notSupported.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.NOT_SUPPORTED_EXCEPTION
+							.getValue(), "Not supported Exception"))
+					.entity(notSupported.toString()).build();
+		} catch (UnsupportedEncodingException unsupported) {
+			log.severe(unsupported.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.UNSUPPORTED_ENCODE
+							.getValue(), "Un supported encoding Exception"))
+					.entity(unsupported.toString()).build();
+		}
+	}
+	
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("/clickCameraMicrophoneOption")
+	public Response clickCameraMicrophoneOption(
+			@QueryParam("browser") String browser,
+			@QueryParam("option") String option) {
+		CommonActions action = new CommonActions();
+		try {
+			action.clickAllowBlockForMicroPhoneCameraOption(browser, option);
+			log.info("CLicked option"+option);
+			return Response
+					.status(Status.OK)
+					.entity("Successfully clicked option -"
+							+ option).build();
+		} catch (FindFailed findFailed) {
+			log.severe(findFailed.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.FIND_FAILED_EXCEPTION
+							.getValue(), "Image Find Failed Exception"))
+					.entity(findFailed.toString()).build();
+		} catch (FileNotFoundException fileNotFound) {
+			log.severe(fileNotFound.toString());
+			return Response
+					.status(new CustomStatusType(
+							STATUS.FILE_NOT_FOUND_EXCEPTION.getValue(),
+							"Image File not found Exception"))
+					.entity(fileNotFound.toString()).build();
+		} catch (NotSupportedException notSupported) {
+			log.severe(notSupported.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.NOT_SUPPORTED_EXCEPTION
+							.getValue(), "Not supported Exception"))
+					.entity(notSupported.toString()).build();
+		} catch (UnsupportedEncodingException unsupported) {
+			log.severe(unsupported.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.UNSUPPORTED_ENCODE
+							.getValue(), "Un supported encoding Exception"))
+					.entity(unsupported.toString()).build();
+		}
+	}
+	
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("/closeCameraMicrophoneOption")
+	public Response closeCameraMicrophoneOption(
+			@QueryParam("browser") String browser) {
+		CommonActions action = new CommonActions();
+		try {
+			action.closeCameraMicrophoneOption(browser);
+			log.info("Successfully closed Allow option");
+			return Response
+					.status(Status.OK)
+					.entity("Successfully closed Allow option").build();
 		} catch (FindFailed findFailed) {
 			log.severe(findFailed.toString());
 			return Response

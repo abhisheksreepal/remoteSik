@@ -19,4 +19,7 @@ public class CommomObjects {
 	public static final String safari7RemoveNowButton = "safari7RemoveNowButton.png";
 	public static final String safari7ClosePreferenceButton = "safari7ClosePreferenceButton.png";
 
+	public static final String allowCameraMicrophone = "allowCameraMicrophone.png";
+	public static final String blockCameraMicrophone = "blockCameraMicrophone.png";
+	public static final String closeCameraMicrophoneDialog = "closeCameraMicrophoneDialog.png";
 }
