@@ -56,6 +56,24 @@ public class SikuliActions {
 		region.wait(new Pattern(imagePath), timeout);
 		log.info("Successfully waited on Image -" + imageName);
 	}
+	
+	public static boolean isImagePresent(RESOURCES resource,
+			String imageName, String browserData)
+			throws  FileNotFoundException,
+			UnsupportedEncodingException, NotSupportedException {
+
+		String imagePath = CommonUtil.getImagePath(resource, imageName,
+				browserData);
+		try{
+		screen.wait(new Pattern(imagePath), TIMEOUT_IN_SECONDS);
+		log.info("Image present -" + imageName);
+		return true;
+		}catch(FindFailed f){
+			log.info("Image not present -" + imageName);
+			return false;
+		}
+		
+	}
 
 	public static void click(RESOURCES resource, String imageName,
 			String browserData, int timeoutInSeconds) throws FindFailed,

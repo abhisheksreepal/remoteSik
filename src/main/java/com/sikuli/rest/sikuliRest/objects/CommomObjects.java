@@ -22,4 +22,16 @@ public class CommomObjects {
 	public static final String allowCameraMicrophone = "allowCameraMicrophone.png";
 	public static final String blockCameraMicrophone = "blockCameraMicrophone.png";
 	public static final String closeCameraMicrophoneDialog = "closeCameraMicrophoneDialog.png";
+	
+	public static final String alwaysAllowCameraIconFromMediaSettings = "alwaysAllowCameraIconFromMediaSettings.png";
+	public static final String alwaysAllowCameraFromMediaSettingsDone = "alwaysAllowCameraFromMediaSettingsDone.png";
+	public static final String alwaysAllowCameraOptionFromMediaSettings = "alwaysAllowCameraOptionFromMediaSettings.png";
+	
+	public static final String peopleStreamOnFirefoxWindows7 = "peopleStreamOnFirefoxWindows7.png";
+	public static final String peopleStreamOnFirefoxWindows8 = "peopleStreamOnFirefoxWindows8.png";
+	public static final String peopleStreamOnFirefoxMaverick = "peopleStreamOnFirefoxMaverick.png";
+	public static final String peopleStreamOnFirefoxYosemite = "peopleStreamOnFirefoxYosemite.png";
+	
+	
+	
 }

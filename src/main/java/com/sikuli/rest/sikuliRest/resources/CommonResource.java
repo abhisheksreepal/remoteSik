@@ -44,11 +44,21 @@ public class CommonResource {
 				"closeCameraMicrophoneOption",
 				"/closeCameraMicrophoneOption",
 				"close allow camera microphone dialog box");
+		CommonActions actions5 = new CommonActions(
+				"alwaysAllowFromMediaSettings",
+				"/alwaysAllowFromMediaSettings",
+				"select always option from media settings");
+		CommonActions actions6 = new CommonActions(
+				"validatePeopleStream",
+				"/validatePeopleStream",
+				"validate people stream");
 		List<CommonActions> list = new ArrayList<>();
 		list.add(actions);
 		list.add(actions2);
 		list.add(actions3);
 		list.add(actions4);
+		list.add(actions5);
+		list.add(actions6);
 		return list;
 	}
 
@@ -186,6 +196,87 @@ public class CommonResource {
 			return Response
 					.status(Status.OK)
 					.entity("Successfully closed Allow option").build();
+		} catch (FindFailed findFailed) {
+			log.severe(findFailed.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.FIND_FAILED_EXCEPTION
+							.getValue(), "Image Find Failed Exception"))
+					.entity(findFailed.toString()).build();
+		} catch (FileNotFoundException fileNotFound) {
+			log.severe(fileNotFound.toString());
+			return Response
+					.status(new CustomStatusType(
+							STATUS.FILE_NOT_FOUND_EXCEPTION.getValue(),
+							"Image File not found Exception"))
+					.entity(fileNotFound.toString()).build();
+		} catch (NotSupportedException notSupported) {
+			log.severe(notSupported.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.NOT_SUPPORTED_EXCEPTION
+							.getValue(), "Not supported Exception"))
+					.entity(notSupported.toString()).build();
+		} catch (UnsupportedEncodingException unsupported) {
+			log.severe(unsupported.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.UNSUPPORTED_ENCODE
+							.getValue(), "Un supported encoding Exception"))
+					.entity(unsupported.toString()).build();
+		}
+	}
+	
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("/alwaysAllowFromMediaSettings")
+	public Response alwaysAllowFromMediaSettings(
+			@QueryParam("browser") String browser) {
+		CommonActions action = new CommonActions();
+		try {
+			action.alwaysAllowFromMediaSettings(browser);
+			log.info("Successfully Allowed option from media settings");
+			return Response
+					.status(Status.OK)
+					.entity("Successfully Allowed option from media settings").build();
+		} catch (FindFailed findFailed) {
+			log.severe(findFailed.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.FIND_FAILED_EXCEPTION
+							.getValue(), "Image Find Failed Exception"))
+					.entity(findFailed.toString()).build();
+		} catch (FileNotFoundException fileNotFound) {
+			log.severe(fileNotFound.toString());
+			return Response
+					.status(new CustomStatusType(
+							STATUS.FILE_NOT_FOUND_EXCEPTION.getValue(),
+							"Image File not found Exception"))
+					.entity(fileNotFound.toString()).build();
+		} catch (NotSupportedException notSupported) {
+			log.severe(notSupported.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.NOT_SUPPORTED_EXCEPTION
+							.getValue(), "Not supported Exception"))
+					.entity(notSupported.toString()).build();
+		} catch (UnsupportedEncodingException unsupported) {
+			log.severe(unsupported.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.UNSUPPORTED_ENCODE
+							.getValue(), "Un supported encoding Exception"))
+					.entity(unsupported.toString()).build();
+		}
+	}
+	
+	
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("/validatePeopleStream")
+	public Response validatePeopleStream(
+			@QueryParam("browser") String browser,@QueryParam("role") String role) {
+		CommonActions action = new CommonActions();
+		try {			
+			action.validatePeopleStream(browser, role);
+			log.info("Successfully validated people stream");
+			return Response
+					.status(Status.OK)
+					.entity("Successfully validated people stream").build();
 		} catch (FindFailed findFailed) {
 			log.severe(findFailed.toString());
 			return Response

@@ -186,5 +186,77 @@ public class CommonActions extends CommomObjects {
 					+ ". Supported browser is chrome");
 		}
 	}
+	
+	public String alwaysAllowFromMediaSettings(String browserData)
+			throws FindFailed, FileNotFoundException, NotSupportedException,
+			UnsupportedEncodingException {
+		if (browserData == null) {
+			log.severe("Browser query param  is missing");
+			throw new NotSupportedException(
+					" Browser query param cannot be null!! or it is missing");
+		}
+		switch (browserData.toLowerCase()) {
+		case "chrome":
+			throw new NotSupportedException("Need to capture 3 images mentioned below and uncomment below code");
+			/*SikuliActions.click(RESOURCES.COMMON, alwaysAllowCameraIconFromMediaSettings, browserData);
+			SikuliActions.click(RESOURCES.COMMON, alwaysAllowCameraOptionFromMediaSettings, browserData);
+			SikuliActions.click(RESOURCES.COMMON, alwaysAllowCameraFromMediaSettingsDone, browserData);
+			return "Success";*/
+		default:
+			log.severe("Invalid browser -" + browserData
+					+ ". Supported browser is chrome");
+			throw new NotSupportedException("Invalid browser -" + browserData
+					+ ". Supported browser is chrome");
+		}
+	}
+	
+	public String validatePeopleStream(String browserData,String role)
+			throws FindFailed, FileNotFoundException, NotSupportedException,
+			UnsupportedEncodingException {
+		if (browserData == null) {
+			log.severe("Browser query param  is missing");
+			throw new NotSupportedException(
+					" Browser query param cannot be null!! or it is missing");
+		}
+		if (role == null) {
+			log.severe("Role query param  is missing");
+			throw new NotSupportedException(
+					" Role query param cannot be null!! or it is missing");
+		}
+		switch (browserData.toLowerCase()) {
+		case "firefox":
+			switch(role){
+			case "moderator":
+			case "panelist":
+			case "attendee":
+				boolean fromYosemite = SikuliActions.isImagePresent( RESOURCES.COMMON, peopleStreamOnFirefoxYosemite, browserData);
+				if(fromYosemite){
+					return "Success";
+				}
+				//TODO --> Capture all images and uncomment below lines
+				/*boolean fromWindow7 = SikuliActions.isImagePresent( RESOURCES.COMMON, peopleStreamOnPanelistOnFirefoxWindows7, browserData);
+				if(fromWindow7){
+					return "Success";
+				}
+				boolean fromWindow8 = SikuliActions.isImagePresent( RESOURCES.COMMON, peopleStreamOnPanelistOnFirefoxWindows8, browserData);
+				if(fromWindow8){
+					return "Success";
+				}
+				boolean fromMaverick = SikuliActions.isImagePresent( RESOURCES.COMMON, peopleStreamOnPanelistOnFirefoxMaverick, browserData);
+				if(fromMaverick){
+					return "Success";
+				}*/
+				throw new FindFailed("People stream not recived on role"+role);
+			default:
+					throw new NotSupportedException("Invalid role -"+role);
+			}
+			
+		default:
+			log.severe("Invalid browser -" + browserData
+					+ ". Supported browser is firefox for now");
+			throw new NotSupportedException("Invalid browser -" + browserData
+					+ ". Supported browser is firefox for now");
+		}
+	}
 
 }
