@@ -1,11 +1,11 @@
 package com.sikuli.rest.util;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
 import com.sikuli.rest.util.customloggers.CustomLogger;
@@ -34,9 +34,9 @@ public class CommonUtil {
 		CARMEL, COMMON
 	}
 
-	public static String getImagePath(RESOURCES resource, String imageName,
+	public static URL getImagePath(RESOURCES resource, String imageName,
 			String browserData) throws FileNotFoundException,
-			NotSupportedException, UnsupportedEncodingException {
+			NotSupportedException, UnsupportedEncodingException{
 
 		if (browserData == null) {
 			log.severe("Browser query param  is missing");
@@ -54,25 +54,44 @@ public class CommonUtil {
 		BROWSERS browser = CommonUtil.getBrowserEnum(browserData);
 		String osInfo = CommonUtil.getOSInfo().toString().toLowerCase();
 
-		String path = SikuliActions.IMAGE_ROOT_PATH + File.separator
-				+ resource.toString().toLowerCase() + File.separator + osInfo
-				+ File.separator + browser.toString().toLowerCase()
-				+ File.separator + imageName;
+		String path = SikuliActions.ftp_repo_url+SikuliActions.IMAGE_ROOT_PATH + "/"
+				+ resource.toString().toLowerCase() + "/"+ osInfo
+				+ "/"+ browser.toString().toLowerCase()
+				+ "/" + imageName;
 
-		URL iPath = CommonUtil.class.getClassLoader().getResource(path);
+		try{
+			URL iPath = new URL(path);
+			if (doesFileExists(iPath.toString())) {
+				log.info("Returning image url ->"
+						+ iPath.toString());
+				return iPath;
+			} else {
+				log.severe("Image -" + imageName
+						+ " NOT found in the following path - " + iPath.toString());
+				throw new FileNotFoundException("Image -" + imageName
+						+ " NOT found in the following path - " + iPath.toString());
+			}
+		}catch(MalformedURLException e){
+			log.severe("INvalid URL path-->" +path);
+			throw new FileNotFoundException("INvalid URL path-->" +path);
+		} catch (IOException e) {
+			log.severe("Io Exception-->" +path);
+			throw new FileNotFoundException("Io Exception-->" +path+" Please check ftp server -->"+SikuliActions.ftp_repo_url);
+		}		
 
-		if (iPath != null) {
-			log.info("Returning image path ->"
-					+ URLDecoder.decode(iPath.getPath(),
-							StandardCharsets.UTF_8.displayName()));
-			return URLDecoder.decode(iPath.getPath(),
-					StandardCharsets.UTF_8.displayName());
-		} else {
-			log.severe("Image -" + imageName
-					+ " NOT found in the following path - " + path);
-			throw new FileNotFoundException("Image -" + imageName
-					+ " NOT found in the following path - " + path);
-		}
+	}
+	
+	private static boolean doesFileExists(String urlString) throws MalformedURLException, IOException {
+
+	    URL u = new URL(urlString); 
+
+	    HttpURLConnection huc =  (HttpURLConnection)  u.openConnection(); 
+
+	    huc.setRequestMethod("GET"); 
+
+	    huc.connect(); 
+
+	    return huc.getResponseCode()==404?false:true;
 
 	}
 

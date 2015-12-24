@@ -2,6 +2,7 @@ package com.sikuli.rest.util;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.logging.Logger;
 
 import org.sikuli.basics.Settings;
@@ -21,6 +22,7 @@ public class SikuliActions {
 	private static final Screen screen = new Screen();
 	public static final String IMAGE_ROOT_PATH = "images";
 	public static final int TIMEOUT_IN_SECONDS = 10;
+	public static final String ftp_repo_url = "http://10.5.6.231:9080/resources/";
 
 	static {
 		Settings.MoveMouseDelay = 1;
@@ -32,7 +34,7 @@ public class SikuliActions {
 			throws FindFailed, FileNotFoundException,
 			UnsupportedEncodingException, NotSupportedException {
 
-		String imagePath = CommonUtil.getImagePath(resource, imageName,
+		URL imagePath = CommonUtil.getImagePath(resource, imageName,
 				browserData);
 		region.wait(new Pattern(imagePath), timeout);
 		region.click(new Pattern(imagePath));
@@ -51,7 +53,7 @@ public class SikuliActions {
 			throws FindFailed, FileNotFoundException,
 			UnsupportedEncodingException, NotSupportedException {
 
-		String imagePath = CommonUtil.getImagePath(resource, imageName,
+		URL imagePath = CommonUtil.getImagePath(resource, imageName,
 				browserData);
 		region.wait(new Pattern(imagePath), timeout);
 		log.info("Successfully waited on Image -" + imageName);
@@ -62,7 +64,7 @@ public class SikuliActions {
 			throws  FileNotFoundException,
 			UnsupportedEncodingException, NotSupportedException {
 
-		String imagePath = CommonUtil.getImagePath(resource, imageName,
+		URL imagePath = CommonUtil.getImagePath(resource, imageName,
 				browserData);
 		try{
 		screen.wait(new Pattern(imagePath), TIMEOUT_IN_SECONDS);
@@ -92,7 +94,7 @@ public class SikuliActions {
 			String imageName, String browserData) throws FindFailed,
 			FileNotFoundException, UnsupportedEncodingException,
 			NotSupportedException {
-		String imagePath = CommonUtil.getImagePath(resource, imageName,
+		URL imagePath = CommonUtil.getImagePath(resource, imageName,
 				browserData);
 		Region region = screen.wait(new Pattern(imagePath), TIMEOUT_IN_SECONDS);
 
