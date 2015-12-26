@@ -197,11 +197,10 @@ public class CommonActions extends CommomObjects {
 		}
 		switch (browserData.toLowerCase()) {
 		case "chrome":
-			throw new NotSupportedException("Need to capture 3 images mentioned below and uncomment below code");
-			/*SikuliActions.click(RESOURCES.COMMON, alwaysAllowCameraIconFromMediaSettings, browserData);
+			SikuliActions.click(RESOURCES.COMMON, alwaysAllowCameraIconFromMediaSettings, browserData);
 			SikuliActions.click(RESOURCES.COMMON, alwaysAllowCameraOptionFromMediaSettings, browserData);
 			SikuliActions.click(RESOURCES.COMMON, alwaysAllowCameraFromMediaSettingsDone, browserData);
-			return "Success";*/
+			return "Success";
 		default:
 			log.severe("Invalid browser -" + browserData
 					+ ". Supported browser is chrome");
