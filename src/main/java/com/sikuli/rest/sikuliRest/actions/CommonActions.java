@@ -209,28 +209,6 @@ public class CommonActions extends CommomObjects {
 		}
 	}
 	
-	public String continueBlockingFromMediaSettings(String browserData)
-			throws FindFailed, FileNotFoundException, NotSupportedException,
-			UnsupportedEncodingException {
-		if (browserData == null) {
-			log.severe("Browser query param  is missing");
-			throw new NotSupportedException(
-					" Browser query param cannot be null!! or it is missing");
-		}
-		switch (browserData.toLowerCase()) {
-		case "chrome":
-			SikuliActions.click(RESOURCES.COMMON, alwaysAllowCameraIconFromMediaSettings, browserData);
-			SikuliActions.click(RESOURCES.COMMON, continueBlockingCameraOptionFromMediaSettings, browserData);
-			SikuliActions.click(RESOURCES.COMMON, alwaysAllowCameraFromMediaSettingsDone, browserData);
-			return "Success";
-		default:
-			log.severe("Invalid browser -" + browserData
-					+ ". Supported browser is chrome");
-			throw new NotSupportedException("Invalid browser -" + browserData
-					+ ". Supported browser is chrome");
-		}
-	}
-	
 	public String validatePeopleStream(String browserData,String role)
 			throws FindFailed, FileNotFoundException, NotSupportedException,
 			UnsupportedEncodingException {
