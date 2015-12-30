@@ -26,6 +26,8 @@ public class CommomObjects {
 	public static final String alwaysAllowCameraIconFromMediaSettings = "alwaysAllowCameraIconFromMediaSettings.png";
 	public static final String alwaysAllowCameraFromMediaSettingsDone = "alwaysAllowCameraFromMediaSettingsDone.png";
 	public static final String alwaysAllowCameraOptionFromMediaSettings = "alwaysAllowCameraOptionFromMediaSettings.png";
+	public static final String continueBlockingCameraOptionFromMediaSettings = "continueBlockingCameraOptionFromMediaSettings.png";
+	
 	
 	public static final String peopleStreamOnFirefoxWindows7 = "peopleStreamOnFirefoxWindows7.png";
 	public static final String peopleStreamOnFirefoxWindows8 = "peopleStreamOnFirefoxWindows8.png";

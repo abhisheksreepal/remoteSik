@@ -264,6 +264,46 @@ public class CommonResource {
 		}
 	}
 	
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("/continueBlockingFromMediaSettings")
+	public Response continueBlockingFromMediaSettings(
+			@QueryParam("browser") String browser) {
+		CommonActions action = new CommonActions();
+		try {
+			action.continueBlockingFromMediaSettings(browser);
+			log.info("Successfully Blocked option from media settings");
+			return Response
+					.status(Status.OK)
+					.entity("Successfully Blocked option from media settings").build();
+		} catch (FindFailed findFailed) {
+			log.severe(findFailed.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.FIND_FAILED_EXCEPTION
+							.getValue(), "Image Find Failed Exception"))
+					.entity(findFailed.toString()).build();
+		} catch (FileNotFoundException fileNotFound) {
+			log.severe(fileNotFound.toString());
+			return Response
+					.status(new CustomStatusType(
+							STATUS.FILE_NOT_FOUND_EXCEPTION.getValue(),
+							"Image File not found Exception"))
+					.entity(fileNotFound.toString()).build();
+		} catch (NotSupportedException notSupported) {
+			log.severe(notSupported.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.NOT_SUPPORTED_EXCEPTION
+							.getValue(), "Not supported Exception"))
+					.entity(notSupported.toString()).build();
+		} catch (UnsupportedEncodingException unsupported) {
+			log.severe(unsupported.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.UNSUPPORTED_ENCODE
+							.getValue(), "Un supported encoding Exception"))
+					.entity(unsupported.toString()).build();
+		}
+	}
+	
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
