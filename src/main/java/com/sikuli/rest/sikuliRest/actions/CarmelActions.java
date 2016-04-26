@@ -58,8 +58,14 @@ public class CarmelActions extends CarmelObjects {
 	public String doClickLaunchDialog(String browserData)
 			throws FileNotFoundException, NotSupportedException, FindFailed,
 			UnsupportedEncodingException {
-		SikuliActions.click(RESOURCES.CARMEL, launchApplicationDialog,
+		try{
+			SikuliActions.click(RESOURCES.CARMEL, launchApplicationDialog,
 				browserData);
+		}catch(Throwable error){
+			selectChromeBrowserIcon(browserData);
+			SikuliActions.click(RESOURCES.CARMEL, launchApplicationDialog,
+					browserData);
+		}
 		return "Success";
 	}
 
@@ -85,6 +91,15 @@ public class CarmelActions extends CarmelObjects {
 			return "already updated";
 		}
 		SikuliActions.wait(RESOURCES.CARMEL, pullingDown, browserData, 10);
+		return "Success";
+
+	}
+	
+	public String selectChromeBrowserIcon(String browserData)
+			throws FileNotFoundException, NotSupportedException, FindFailed,
+			UnsupportedEncodingException {
+		SikuliActions.click(RESOURCES.CARMEL, selectChromeBrowserIcon,
+				browserData);
 		return "Success";
 
 	}

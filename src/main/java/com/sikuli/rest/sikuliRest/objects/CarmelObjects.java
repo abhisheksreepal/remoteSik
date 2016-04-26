@@ -9,5 +9,7 @@ public class CarmelObjects {
 
 	public static final String update = "update.png";
 	public static final String pullingDown = "pullingDown.png";
+	
+	public static final String selectChromeBrowserIcon = "selectChromeBrowserIcon.png";
 
 }
