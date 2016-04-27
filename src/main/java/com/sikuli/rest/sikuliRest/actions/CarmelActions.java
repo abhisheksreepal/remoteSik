@@ -63,6 +63,7 @@ public class CarmelActions extends CarmelObjects {
 				browserData);
 		}catch(Throwable error){
 			selectChromeBrowserIcon(browserData);
+			SikuliActions.wait(RESOURCES.CARMEL, launchApplicationDialog, browserData, 10);
 			SikuliActions.click(RESOURCES.CARMEL, launchApplicationDialog,
 					browserData);
 		}
