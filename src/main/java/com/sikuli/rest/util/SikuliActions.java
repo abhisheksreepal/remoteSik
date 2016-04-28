@@ -40,6 +40,18 @@ public class SikuliActions {
 		region.click(new Pattern(imagePath));
 		log.info("Successfully clicked on Image -" + imageName);
 	}
+	
+	public static void rightClick(Region region, RESOURCES resource,
+			String imageName, String browserData, int timeout)
+			throws FindFailed, FileNotFoundException,
+			UnsupportedEncodingException, NotSupportedException {
+
+		URL imagePath = CommonUtil.getImagePath(resource, imageName,
+				browserData);
+		region.wait(new Pattern(imagePath), timeout);
+		region.rightClick(new Pattern(imagePath));
+		log.info("Successfully right clicked on Image -" + imageName);
+	}
 
 	public static void wait(RESOURCES resource, String imageName,
 			String browserData, int timeoutInSeconds) throws FindFailed,
@@ -88,6 +100,12 @@ public class SikuliActions {
 			String browserData) throws FindFailed, FileNotFoundException,
 			UnsupportedEncodingException, NotSupportedException {
 		click(screen, resource, imageName, browserData, TIMEOUT_IN_SECONDS);
+	}
+	
+	public static void rightClick(RESOURCES resource, String imageName,
+			String browserData) throws FindFailed, FileNotFoundException,
+			UnsupportedEncodingException, NotSupportedException {
+		rightClick(screen, resource, imageName, browserData, TIMEOUT_IN_SECONDS);
 	}
 
 	public static void clickLeftByOffSet(int offset, RESOURCES resource,

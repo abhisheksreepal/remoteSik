@@ -62,7 +62,7 @@ public class CarmelActions extends CarmelObjects {
 			SikuliActions.click(RESOURCES.CARMEL, launchApplicationDialog,
 				browserData);
 		}catch(Throwable error){
-			selectChromeBrowserIcon(browserData);
+			hideBlueJeansApp(browserData);
 			SikuliActions.wait(RESOURCES.CARMEL, launchApplicationDialog, browserData, 10);
 			SikuliActions.click(RESOURCES.CARMEL, launchApplicationDialog,
 					browserData);
@@ -100,6 +100,18 @@ public class CarmelActions extends CarmelObjects {
 			throws FileNotFoundException, NotSupportedException, FindFailed,
 			UnsupportedEncodingException {
 		SikuliActions.click(RESOURCES.CARMEL, selectChromeBrowserIcon,
+				browserData);
+		return "Success";
+
+	}
+	
+	
+	public String hideBlueJeansApp(String browserData)
+			throws FileNotFoundException, NotSupportedException, FindFailed,
+			UnsupportedEncodingException {
+		SikuliActions.rightClick(RESOURCES.CARMEL, blueJeansApp,
+				browserData);
+		SikuliActions.click(RESOURCES.CARMEL, hideText,
 				browserData);
 		return "Success";
 

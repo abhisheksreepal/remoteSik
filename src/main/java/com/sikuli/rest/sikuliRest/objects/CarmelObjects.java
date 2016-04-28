@@ -12,4 +12,8 @@ public class CarmelObjects {
 	
 	public static final String selectChromeBrowserIcon = "selectChromeBrowserIcon.png";
 
+	public static final String blueJeansApp = "blueJeansApp.png";
+
+	public static final String hideText = "hideText.png";
+
 }
