@@ -109,8 +109,13 @@ public class CarmelActions extends CarmelObjects {
 	public String hideBlueJeansApp(String browserData)
 			throws FileNotFoundException, NotSupportedException, FindFailed,
 			UnsupportedEncodingException {
+		try{
+		Settings.MinSimilarity = 0.6;
 		SikuliActions.rightClick(RESOURCES.CARMEL, blueJeansApp,
 				browserData);
+		}finally{
+			Settings.MinSimilarity = 0.7;
+		}
 		SikuliActions.click(RESOURCES.CARMEL, hideText,
 				browserData);
 		return "Success";
