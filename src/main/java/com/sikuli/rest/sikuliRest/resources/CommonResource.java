@@ -52,6 +52,11 @@ public class CommonResource {
 				"validatePeopleStream",
 				"/validatePeopleStream",
 				"validate people stream");
+		CommonActions actions7 = new CommonActions(
+				"performKeyStrokeOperation",
+				"/performKeyStrokeOperation",
+				"Perform key stroke operation for functionalities like minimizing all the application windows etc. " +
+						"Usage -- >   Key : action, " + "value: [ 'MINIMIZE_ALL_WINDOWS' ] ");
 		List<CommonActions> list = new ArrayList<>();
 		list.add(actions);
 		list.add(actions2);
@@ -59,6 +64,7 @@ public class CommonResource {
 		list.add(actions4);
 		list.add(actions5);
 		list.add(actions6);
+		list.add(actions7);
 		return list;
 	}
 
@@ -304,5 +310,28 @@ public class CommonResource {
 					.entity(unsupported.toString()).build();
 		}
 	}
+	
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("/performKeyStrokeOperation")
+	public Response performKeyStrokeOperation(@QueryParam("action") String actionparam ) {
+
+		CommonActions action = new CommonActions();
+		try {
+			action.performKeyStrokeOperation( actionparam ) ;
+			log.info("Successfully performed the keystroke operation " + actionparam );
+			return Response
+					.status(Status.OK)
+					.entity("Successfully performed the keystroke operation " + actionparam).build();
+		} catch (NotSupportedException notSupported) {
+			log.severe(notSupported.toString());
+			return Response
+					.status(new CustomStatusType(STATUS.NOT_SUPPORTED_EXCEPTION
+							.getValue(), "Not supported Exception"))
+					.entity(notSupported.toString()).build();
+		}
+
+	}
+
 
 }

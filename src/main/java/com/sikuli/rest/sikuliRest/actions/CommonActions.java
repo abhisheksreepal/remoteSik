@@ -7,8 +7,10 @@ import java.util.logging.Logger;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.sikuli.script.FindFailed;
+import org.sikuli.script.Key;
 
 import com.sikuli.rest.sikuliRest.objects.CommomObjects;
+import com.sikuli.rest.util.CommonUtil;
 import com.sikuli.rest.util.CommonUtil.RESOURCES;
 import com.sikuli.rest.util.SikuliActions;
 import com.sikuli.rest.util.customloggers.CustomLogger;
@@ -257,5 +259,44 @@ public class CommonActions extends CommomObjects {
 					+ ". Supported browser is firefox for now");
 		}
 	}
+	
+	public void performKeyStrokeOperation( String action ) throws NotSupportedException{
+
+
+
+		if (action == null) {
+			log.severe("Keystroke_action query param  is missing");
+			throw new NotSupportedException(
+					" Keystroke_action query param cannot be null!! or it is missing");
+		}
+
+		switch( action.trim() )
+		{
+			case "MINIMIZE_ALL_WINDOWS":
+				switch ( CommonUtil.getOSInfo() )
+				{
+					case WINDOWS8:
+					case WINDOWS7:
+						SikuliActions.keystrokes( "m", Key.WIN ) ;
+						break ;
+
+					case YOSEMITE:
+					case MAVERICK:
+						SikuliActions.keystrokes( "", Key.F11 ) ;
+						break ;
+
+					default:
+						throw  new NotSupportedException(  " OS not supported "+ CommonUtil.getOSInfo()  ) ;
+				}
+				break ;
+			default:
+				throw new NotSupportedException("The following action not supported "+ action  ) ;
+
+
+		}
+
+
+	}
+
 
 }

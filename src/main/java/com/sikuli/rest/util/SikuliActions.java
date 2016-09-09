@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import org.sikuli.basics.Settings;
 import org.sikuli.script.FindFailed;
+import org.sikuli.script.Key;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Region;
 import org.sikuli.script.Screen;
@@ -135,6 +136,17 @@ public class SikuliActions {
 				new Pattern(CommonUtil.getImagePath(resource, childImageName,
 						browserData)), TIMEOUT_IN_SECONDS);
 		click(region, resource, childImageName, browserData, TIMEOUT_IN_SECONDS);
+
+	}
+	
+	public  static void keystrokes(String key, String spec_Key )
+	{
+
+				if (key.equals("")) {
+					screen.type(spec_Key);
+				} else {
+					screen.type(key, Key.WIN);
+				}
 
 	}
 
